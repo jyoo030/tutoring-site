@@ -4,14 +4,41 @@ import * as ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
+import { 
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
+
+import Invoices from './routes/invoices';
+import Expenses from './routes/expenses';
+import Contact from './routes/contact';
+import SignupCard from './routes/signup';
+import SigninCard from './routes/signin';
+import HomePage from './routes/home';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
 root.render(
   <StrictMode>
-    <ColorModeScript />
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={
+          <>
+            <ColorModeScript />
+            <App />
+          </>
+        }>
+          <Route path="expenses" element={<Expenses />} />
+          <Route path="invoices" element={<Invoices />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="signup" element={<SignupCard />} />
+          <Route path="signin" element={<SigninCard />} />
+          <Route path="home" element={<HomePage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   </StrictMode>
 );
 
