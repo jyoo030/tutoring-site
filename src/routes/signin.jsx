@@ -12,6 +12,7 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { Link as LinkRouter } from 'react-router-dom';
 
 export default function SigninCard() {
   return (
@@ -23,9 +24,6 @@ export default function SigninCard() {
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'}>Sign in to your account</Heading>
-          <Text fontSize={'lg'} color={'gray.600'}>
-            to enjoy all of our cool <Link color={'blue.400'}>features</Link> ✌️
-          </Text>
         </Stack>
         <Box
           rounded={'lg'}
@@ -45,7 +43,9 @@ export default function SigninCard() {
               <Stack
                 direction={{ base: 'column', sm: 'row' }}
                 align={'start'}
-                justify={'space-between'}>
+                justify={'space-between'}
+                fontSize={'md'} 
+                color={'gray.600'}>
                 <Checkbox>Remember me</Checkbox>
                 <Link color={'blue.400'}>Forgot password?</Link>
               </Stack>
@@ -58,6 +58,15 @@ export default function SigninCard() {
                 Sign in
               </Button>
             </Stack>
+              <Stack
+                direction={{ base: 'column', sm: 'row' }}
+                align={'start'}
+                justify={'space-between'} 
+                fontSize={'md'} 
+                color={'gray.600'}>
+                <Text>Need an account?</Text>
+                <Link color={'blue.400'}><LinkRouter to="/signup">Sign up</LinkRouter></Link>
+              </Stack>
           </Stack>
         </Box>
       </Stack>

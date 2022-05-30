@@ -27,9 +27,10 @@ export default function HomePage() {
           </Text>
         </Heading>
         <Text color={'gray.500'} maxW={'3xl'}>
-          It's not too late! For a small price of 10000000 dollars an hour, you too can copy paste off stack overflow and become a programmer like me.
-        </Text>
-        <Stack spacing={6} direction={'row'}>
+          It's not too late! For a small price of 10000000 dollars an hour, you too can copy paste off stack overflow and become a programmer like me.</Text>
+        <Text maxW={'3xl'}> Notes: The darkmode integration not fully there yet, I haven't set up the themes properly yet. If you try clicking something and nothing happens, that probably means that the routing isn't set up yet. There is no backend set up yet, only frontend
+</Text>
+        <Stack spacing={6} direction={'row'} >
           <Button
             rounded={'full'}
             px={6}

@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { Link as LinkRouter } from 'react-router-dom';
 
 export default function SignupCard() {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,12 +30,12 @@ export default function SignupCard() {
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'} textAlign={'center'}>
-            Sign up
+            Sign up 
           </Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
-            to enjoy all of our cool features ✌️
+            to schedule your first class! 
           </Text>
-        </Stack>
+       </Stack>
         <Box
           rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}
@@ -86,11 +87,15 @@ export default function SignupCard() {
                 Sign up
               </Button>
             </Stack>
-            <Stack pt={6}>
-              <Text align={'center'}>
-                Already a user? <Link color={'blue.400'}>Login</Link>
-              </Text>
-            </Stack>
+              <Stack
+                direction={{ base: 'column', sm: 'row' }}
+                align={'start'}
+                justify={'space-between'}
+                fontSize={'md'}
+                color={'gray.600'}>
+                  <Text>Already a user?</Text>
+                  <Link color={'blue.400'}><LinkRouter to="/signin">Sign in</LinkRouter></Link>
+              </Stack>
           </Stack>
         </Box>
       </Stack>

@@ -22,13 +22,19 @@ import {
   ChevronRightIcon,
 } from '@chakra-ui/icons';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Link as LinkRouter } from 'react-router-dom';
+import { Link as LinkRouter, useNavigate } from 'react-router-dom';
+import { useCallback } from 'react';
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
+  const navigate = useNavigate();
+  const signUpOnClick = useCallback(() => navigate('/signup', {replace: true}), [navigate]);
+  const signInOnClick = useCallback(() => navigate('/signin', {replace: true}), [navigate]);
+  const contactOnClick = useCallback(() => navigate('/contact', {replace: true}), [navigate]);
+  const homeOnClick = useCallback(() => navigate('/home', {replace: true}), [navigate]);
 
   return (
-    <Box>
+    <Box as="header" position="fixed" w="100%" zIndex="9999">
       <Flex
         bg={useColorModeValue('white', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
@@ -36,7 +42,7 @@ export default function WithSubnavigation() {
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
-        borderStyle={'solid'}
+        borderStyle={'groove'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
         align={'center'}>
         <Flex
@@ -57,7 +63,7 @@ export default function WithSubnavigation() {
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}>
-            Logo
+            JYOONITS LLC
           </Text>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -75,16 +81,18 @@ export default function WithSubnavigation() {
             fontSize={'sm'}
             fontWeight={400}
             variant={'link'}
-            href={'/home'}>
-            {<LinkRouter to="/home">Go Home</LinkRouter>}
+            onClick={homeOnClick}
+            href={'#'}>
+              Go Home
           </Button>
           <Button
             as={'a'}
             fontSize={'sm'}
             fontWeight={400}
             variant={'link'}
-            href={'signin'}>
-            {<LinkRouter to="/signin">Sign In</LinkRouter>}
+            onClick={signInOnClick}
+            href={'#'}>
+              Sign In
           </Button>
           <Button
             display={{ base: 'none', md: 'inline-flex' }}
@@ -92,11 +100,12 @@ export default function WithSubnavigation() {
             fontWeight={600}
             color={'white'}
             bg={'pink.400'}
-            href={'/signup'}
+            href={'#'}
+            onClick={signUpOnClick}
             _hover={{
               bg: 'pink.300',
             }}>
-            {<LinkRouter to="/signup">Sign Up</LinkRouter>}
+              Sign Up
           </Button>
           <Button
             display={{ base: 'none', md: 'inline-flex' }}
@@ -104,11 +113,12 @@ export default function WithSubnavigation() {
             fontWeight={600}
             color={'white'}
             bg={'blue.400'}
-            href={'/contact'}
+            onClick={contactOnClick}
+            href={'#'}
             _hover={{
               bg: 'blue.300',
             }}>
-            {<LinkRouter to="/contact">Contact</LinkRouter>}
+              Contact
           </Button>
           <ColorModeSwitcher justifySelf="flex-end" />
         </Stack>
