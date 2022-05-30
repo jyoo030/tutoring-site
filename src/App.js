@@ -2,23 +2,21 @@ import React from 'react';
 import {
   ChakraProvider,
   Box,
-  Text,
-  VStack,
-  Code,
   Grid,
   theme,
 } from '@chakra-ui/react';
-import { Logo } from './Logo';
 import NavBar from './WithSubnavigation';
-import { Outlet, Link } from "react-router-dom";
-import Contact from './routes/contact'
+import { Outlet, useLocation, Navigate} from "react-router-dom";
 
 function App() {
+  const isInitial = useLocation().pathname === "/"
+
   return (
     <ChakraProvider theme={theme}>
       <Box textAlign="center" fontSize="xl">
         <Grid minH="100%">
           <NavBar />
+          {isInitial && <Navigate to="/home"/>}
           <Outlet />
         </Grid>
       </Box>
