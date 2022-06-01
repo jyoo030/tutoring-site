@@ -1,158 +1,185 @@
 import {
-  Container,
-  Flex,
   Box,
-  Heading,
-  Text,
-  IconButton,
   Button,
-  VStack,
-  HStack,
-  Wrap,
-  WrapItem,
+  Flex,
   FormControl,
   FormLabel,
+  Heading,
+  IconButton,
   Input,
   InputGroup,
   InputLeftElement,
+  Link,
+  Stack,
   Textarea,
-  useColorModeValue
+  Tooltip,
+  useClipboard,
+  useColorModeValue,
+  VStack,
 } from '@chakra-ui/react';
-import {
-  MdPhone,
-  MdEmail,
-  MdLocationOn,
-} from 'react-icons/md';
+import React from 'react';
+import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { BsPerson } from 'react-icons/bs';
-import { WarningIcon } from '@chakra-ui/icons';
-// TODO: FIX COLORS 
+import { MdEmail, MdMailOutline } from 'react-icons/md';
+import { CONFETTI_LIGHT, CONFETTI_DARK } from '../resources/constants'
 
-export default function Contact() {
+export default function ContactFormWithSocialButtons() {
+  const { hasCopied, onCopy } = useClipboard('example@example.com');
+
   return (
-    <Container bg={useColorModeValue('gray.50', 'gray.800')} minH={'100vh'} maxW="full" mt={0} centerContent overflow="hidden">
-      <Flex>
-        <Box
-          bg={useColorModeValue("purple.900", 'gray.700')}
-          color="white"
-          borderRadius="lg"
-          m={{ sm: 4, md: 16, lg: 10 }}
-          p={{ sm: 5, md: 5, lg: 16 }}>
-          <Box p={4}>
-            <Wrap spacing={{ base: 20, sm: 3, md: 5, lg: 20 }}>
-              <WrapItem>
-                <Box>
-                  <Heading>THIS IS A WORK IN PROGRESS</Heading>
-                  <Heading>Contact</Heading>
-                  <Text mt={{ sm: 3, md: 3, lg: 5 }} color="gray.500">
-                    Fill up the form below to contact
-                  </Text>
-                  <Box py={{ base: 5, sm: 5, md: 8, lg: 10 }}>
-                    <VStack pl={0} spacing={3} alignItems="flex-start">
-                      <Button
-                        size="md"
-                        height="48px"
-                        width="200px"
-                        variant="ghost"
-                        color="#DCE2FF"
-                        _hover={{ border: '2px solid #1C6FEB' }}
-                        leftIcon={<MdPhone color="#1970F1" size="20px" />}>
-                        +1911
-                      </Button>
-                      <Button
-                        size="md"
-                        height="48px"
-                        width="200px"
-                        variant="ghost"
-                        color="#DCE2FF"
-                        _hover={{ border: '2px solid #1C6FEB' }}
-                        leftIcon={<MdEmail color="#1970F1" size="20px" />}>
-                        hello@money.com
-                      </Button>
-                    </VStack>
-                  </Box>
-                  <HStack
-                    mt={{ lg: 10, md: 10 }}
-                    spacing={5}
-                    px={5}
-                    alignItems="flex-start">
+    <Flex
+      bg={useColorModeValue('gray.100', 'gray.900')}
+      align="center"
+      justify="center"
+      minH="100vh"
+      css={{
+        backgroundImage: useColorModeValue(CONFETTI_LIGHT, CONFETTI_DARK),
+        backgroundAttachment: 'fixed',
+      }}
+      id="contact">
+      <Box
+        borderRadius="lg"
+        m={{ base: 5, md: 16, lg: 10 }}
+        p={{ base: 5, lg: 16 }}>
+        <Box>
+          <VStack spacing={{ base: 4, md: 8, lg: 20 }}>
+            <Heading
+              fontSize={{
+                base: '4xl',
+                md: '5xl',
+              }}>
+              Get in Touch
+            </Heading>
+
+            <Box bg={useColorModeValue('gray.300', 'gray.700')} shadow="base" borderRadius="lg" borderColor="black">
+              <Stack
+                p={10}
+                spacing={{ base: 4, md: 8, lg: 10 }}
+                direction={{ base: 'column', md: 'row' }}>
+                <Stack
+                  align="center"
+                  justify="space-around"
+                  direction={{ base: 'row', md: 'column' }}>
+                  <Tooltip
+                    label={hasCopied ? 'Email Copied!' : 'Copy Email'}
+                    closeOnClick={false}
+                    hasArrow>
+                    <IconButton
+                      aria-label="email"
+                      variant="ghost"
+                      size="lg"
+                      fontSize="3xl"
+                      icon={<MdEmail />}
+                      _hover={{
+                        bg: 'blue.500',
+                        color: useColorModeValue('white', 'gray.700'),
+                      }}
+                      onClick={onCopy}
+                      isRound
+                    />
+                  </Tooltip>
+
+                  <Link href="#">
                     <IconButton
                       aria-label="github"
                       variant="ghost"
                       size="lg"
-                      isRound={true}
-                      _hover={{ bg: '#0D74FF' }}
-                      icon={<WarningIcon/>}
+                      fontSize="3xl"
+                      icon={<FaGithub />}
+                      _hover={{
+                        bg: 'blue.500',
+                        color: useColorModeValue('white', 'gray.700'),
+                      }}
+                      isRound
                     />
+                  </Link>
+
+                  <Link href="#">
                     <IconButton
-                      aria-label="discord"
+                      aria-label="twitter"
                       variant="ghost"
                       size="lg"
-                      isRound={true}
-                      _hover={{ bg: '#0D74FF' }}
-                      icon={<WarningIcon/>}
+                      icon={<FaTwitter size="28px" />}
+                      _hover={{
+                        bg: 'blue.500',
+                        color: useColorModeValue('white', 'gray.700'),
+                      }}
+                      isRound
                     />
+                  </Link>
+
+                  <Link href="#">
                     <IconButton
-                      aria-label="discord"
+                      aria-label="linkedin"
                       variant="ghost"
                       size="lg"
-                      isRound={true}
-                      _hover={{ bg: '#0D74FF' }}
-                      icon={<WarningIcon/>}
+                      icon={<FaLinkedin size="28px" />}
+                      _hover={{
+                        bg: 'blue.500',
+                        color: useColorModeValue('white', 'gray.700'),
+                      }}
+                      isRound
                     />
-                  </HStack>
-                </Box>
-              </WrapItem>
-              <WrapItem>
-                <Box bg="white" borderRadius="lg">
-                  <Box m={8} color="#0B0E3F">
-                    <VStack spacing={5}>
-                      <FormControl id="name">
-                        <FormLabel>Your Name</FormLabel>
-                        <InputGroup borderColor="#E0E1E7">
-                          <InputLeftElement
-                            pointerEvents="none"
-                            children={<BsPerson color="gray.800" />}
-                          />
-                          <Input type="text" size="md" />
-                        </InputGroup>
-                      </FormControl>
-                      <FormControl id="name">
-                        <FormLabel>Mail</FormLabel>
-                        <InputGroup borderColor="#E0E1E7">
-                          <InputLeftElement
-                            pointerEvents="none"
-                            children={<MdEmail color="gray.800" />}
-                          />
-                          <Input type="text" size="md" />
-                        </InputGroup>
-                      </FormControl>
-                      <FormControl id="name">
-                        <FormLabel>Message</FormLabel>
-                        <Textarea
-                          borderColor="gray.300"
-                          _hover={{
-                            borderRadius: 'gray.300',
-                          }}
-                          placeholder="message"
+                  </Link>
+                </Stack>
+
+                <Box
+                  bg={useColorModeValue('white', 'gray.700')}
+                  borderRadius="lg"
+                  p={8}
+                  color={useColorModeValue('gray.700', 'whiteAlpha.900')}
+                  shadow="base">
+                  <VStack spacing={5}>
+                    <FormControl isRequired>
+                      <FormLabel>Name</FormLabel>
+
+                      <InputGroup>
+                        <InputLeftElement children={<BsPerson />} />
+                        <Input type="text" name="name" placeholder="Your Name" />
+                      </InputGroup>
+                    </FormControl>
+
+                    <FormControl isRequired>
+                      <FormLabel>Email</FormLabel>
+
+                      <InputGroup>
+                        <InputLeftElement children={<MdMailOutline />} />
+                        <Input
+                          type="email"
+                          name="email"
+                          placeholder="Your Email"
                         />
-                      </FormControl>
-                      <FormControl id="name" float="right">
-                        <Button
-                          variant="solid"
-                          bg="#0D74FF"
-                          color="white"
-                          _hover={{}}>
-                          Send Message
-                        </Button>
-                      </FormControl>
-                    </VStack>
-                  </Box>
+                      </InputGroup>
+                    </FormControl>
+
+                    <FormControl isRequired>
+                      <FormLabel>Message</FormLabel>
+
+                      <Textarea
+                        name="message"
+                        placeholder="Your Message"
+                        rows={6}
+                        resize="none"
+                      />
+                    </FormControl>
+
+                    <Button
+                      colorScheme="blue"
+                      bg="blue.400"
+                      color="white"
+                      _hover={{
+                        bg: 'blue.500',
+                      }}
+                      w="100%">
+                      Send Message
+                    </Button>
+                  </VStack>
                 </Box>
-              </WrapItem>
-            </Wrap>
-          </Box>
+              </Stack>
+              </Box>
+          </VStack>
         </Box>
-      </Flex>
-    </Container>
+      </Box>
+    </Flex>
   );
 }
