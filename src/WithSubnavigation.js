@@ -284,22 +284,32 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'Has 2 Dropdown',
+    label: 'Courses',
     children: [
       {
-        label: 'dropdown child',
-        subLabel: 'child description',
+        label: 'AP Prep',
+        subLabel: 'Be prepared to tackle the CS AP Exams!',
         href: '#',
+        children: [
+          {
+            label: 'AP CS A',
+            href: '#',
+          },
+          {
+            lable: 'AP CS B',
+            href: '#',
+          }
+        ],
       },
       {
-        label: 'dropdown child 2',
-        subLabel: 'child 2 description',
+        label: 'Web Development',
+        subLabel: 'Learn how to create a website just like this one!',
         href: '#',
       },
     ],
   },
   {
-    label: 'No Dropdown',
+    label: 'Information',
     href: '#',
   },
 ];
